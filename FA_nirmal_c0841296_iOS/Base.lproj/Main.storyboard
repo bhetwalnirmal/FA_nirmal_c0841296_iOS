@@ -27,7 +27,7 @@
                                         <subviews>
                                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z80-Qx-Enp">
                                                 <rect key="frame" x="0.0" y="0.0" width="114.5" height="161.5"/>
-                                                <state key="normal" title="Button" image="cross"/>
+                                                <state key="normal" title="Button"/>
                                                 <connections>
                                                     <action selector="onClickCell00:" destination="q2o-te-CwK" eventType="touchUpInside" id="9N7-lA-ZNA"/>
                                                 </connections>
@@ -144,7 +144,6 @@
     </scenes>
     <resources>
         <image name="board" width="744" height="783"/>
-        <image name="cross" width="214" height="214"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
