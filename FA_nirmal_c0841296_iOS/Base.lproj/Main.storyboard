@@ -27,24 +27,18 @@
                                         <subviews>
                                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z80-Qx-Enp">
                                                 <rect key="frame" x="0.0" y="0.0" width="114.5" height="161.5"/>
-                                                <state key="normal" title="Button"/>
+                                                <state key="normal" title="Button" image="cross"/>
                                                 <connections>
-                                                    <action selector="btnPressed:" destination="q2o-te-CwK" eventType="touchUpInside" id="e16-va-W6j"/>
+                                                    <action selector="onClickCell00:" destination="q2o-te-CwK" eventType="touchUpInside" id="9N7-lA-ZNA"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="25b-iv-cRG">
                                                 <rect key="frame" x="139.5" y="0.0" width="115" height="161.5"/>
                                                 <state key="normal" title="Button"/>
-                                                <connections>
-                                                    <action selector="btnPressed:" destination="q2o-te-CwK" eventType="touchUpInside" id="zbr-av-url"/>
-                                                </connections>
                                             </button>
                                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BQy-eF-Qif">
                                                 <rect key="frame" x="279.5" y="0.0" width="114.5" height="161.5"/>
                                                 <state key="normal" title="Button"/>
-                                                <connections>
-                                                    <action selector="btnPressed:" destination="q2o-te-CwK" eventType="touchUpInside" id="wKQ-M0-fBb"/>
-                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -54,23 +48,14 @@
                                             <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="834-HI-gwF">
                                                 <rect key="frame" x="0.0" y="0.0" width="114.5" height="161"/>
                                                 <state key="normal" title="Button"/>
-                                                <connections>
-                                                    <action selector="btnPressed:" destination="q2o-te-CwK" eventType="touchUpInside" id="sLd-7y-3kL"/>
-                                                </connections>
                                             </button>
                                             <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WyS-no-ZbB">
                                                 <rect key="frame" x="139.5" y="0.0" width="115" height="161"/>
                                                 <state key="normal" title="Button"/>
-                                                <connections>
-                                                    <action selector="btnPressed:" destination="q2o-te-CwK" eventType="touchUpInside" id="aRx-81-kWA"/>
-                                                </connections>
                                             </button>
                                             <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XUa-vk-TYm">
                                                 <rect key="frame" x="279.5" y="0.0" width="114.5" height="161"/>
                                                 <state key="normal" title="Button"/>
-                                                <connections>
-                                                    <action selector="btnPressed:" destination="q2o-te-CwK" eventType="touchUpInside" id="vtk-kh-4hw"/>
-                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -80,23 +65,14 @@
                                             <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KIy-6r-bwW">
                                                 <rect key="frame" x="0.0" y="0.0" width="114.5" height="161.5"/>
                                                 <state key="normal" title="Button"/>
-                                                <connections>
-                                                    <action selector="btnPressed:" destination="q2o-te-CwK" eventType="touchUpInside" id="qMG-lo-43y"/>
-                                                </connections>
                                             </button>
                                             <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fB9-ga-hHg">
                                                 <rect key="frame" x="139.5" y="0.0" width="115" height="161.5"/>
                                                 <state key="normal" title="Button"/>
-                                                <connections>
-                                                    <action selector="btnPressed:" destination="q2o-te-CwK" eventType="touchUpInside" id="kEA-cn-q4g"/>
-                                                </connections>
                                             </button>
                                             <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eg0-wf-0HI">
                                                 <rect key="frame" x="279.5" y="0.0" width="114.5" height="161.5"/>
                                                 <state key="normal" title="Button"/>
-                                                <connections>
-                                                    <action selector="btnPressed:" destination="q2o-te-CwK" eventType="touchUpInside" id="129-dL-HD5"/>
-                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -108,14 +84,6 @@
                                 <color key="textColor" systemColor="systemGreenColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kll-w1-C07">
-                                <rect key="frame" x="117" y="418" width="180" height="60"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                <state key="normal" title="Play Again"/>
-                                <connections>
-                                    <action selector="playAgain:" destination="q2o-te-CwK" eventType="touchUpInside" id="UPm-Aw-6Q9"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="4VE-66-j3t"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -123,8 +91,6 @@
                             <constraint firstItem="fWQ-mn-oAF" firstAttribute="top" secondItem="4VE-66-j3t" secondAttribute="top" constant="150" id="1xl-EM-Qy3"/>
                             <constraint firstItem="hk8-ll-2qa" firstAttribute="top" secondItem="fWQ-mn-oAF" secondAttribute="top" id="6QB-sB-tbX"/>
                             <constraint firstItem="hk8-ll-2qa" firstAttribute="bottom" secondItem="fWQ-mn-oAF" secondAttribute="bottom" id="CTa-8v-6tK"/>
-                            <constraint firstItem="kll-w1-C07" firstAttribute="centerX" secondItem="OuD-me-M3Z" secondAttribute="centerX" id="Cdc-33-rkC"/>
-                            <constraint firstItem="kll-w1-C07" firstAttribute="centerY" secondItem="OuD-me-M3Z" secondAttribute="centerY" id="EwQ-dW-cFu"/>
                             <constraint firstItem="fWQ-mn-oAF" firstAttribute="leading" secondItem="4VE-66-j3t" secondAttribute="leading" constant="10" id="Gwe-k2-L1B"/>
                             <constraint firstItem="4VE-66-j3t" firstAttribute="trailing" secondItem="fWQ-mn-oAF" secondAttribute="trailing" constant="10" id="SG8-AS-RyO"/>
                             <constraint firstItem="4VE-66-j3t" firstAttribute="bottom" secondItem="fWQ-mn-oAF" secondAttribute="bottom" constant="150" id="Z57-dt-6L2"/>
@@ -135,6 +101,9 @@
                             <constraint firstItem="4VE-66-j3t" firstAttribute="trailing" secondItem="ejm-fk-chj" secondAttribute="trailing" constant="50" id="wbP-or-u5w"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="cell00" destination="Z80-Qx-Enp" id="Wnx-04-DrS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rbF-aQ-ifu" sceneMemberID="firstResponder"/>
             </objects>
@@ -143,6 +112,7 @@
     </scenes>
     <resources>
         <image name="board" width="744" height="783"/>
+        <image name="cross" width="214" height="214"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
