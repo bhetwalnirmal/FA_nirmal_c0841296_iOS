@@ -21,6 +21,7 @@ class ViewController: UIViewController {
     
     var player1: Player = Player(name: "Player 1", mark: .NOUGHT)
     var player2: Player = Player(name: "Player 2", mark: .CROSS)
+    var gameHistory: [GameHistory] = [GameHistory]()
     
     @IBOutlet weak var cell00: UIButton!
     @IBOutlet weak var cell01: UIButton!
@@ -99,77 +100,9 @@ class ViewController: UIViewController {
             imageName = "cross"
         }
         
+        self.gameHistory.append(GameHistory(player: getCurrentPlayer(), mark: mark, row: row, column: column))
+        
         sender.setImage(UIImage(named: imageName), for: .normal)
-    }
-    
-    @IBAction func onClickCell01(_ sender: UIButton) {
-        let row = 0
-        let column = 1
-        
-        board[row][column] = getCurrentPlayer().mark
-    }
-    
-    @IBAction func onClickCell02(_ sender: UIButton) {
-        let row = 0
-        let column = 2
-        
-        board[row][column] = getCurrentPlayer().mark
-    }
-    
-    @IBAction func onClickCell10(_ sender: UIButton) {
-        let row = 1
-        let column = 0
-        
-        board[row][column] = getCurrentPlayer().mark
-    }
-    
-    @IBAction func onClickCell11(_ sender: UIButton) {
-        let row = 1
-        let column = 1
-        
-        board[row][column] = getCurrentPlayer().mark
-    }
-    
-    @IBAction func onClickCell12(_ sender: UIButton) {
-        let row = 1
-        let column = 2
-        
-        board[row][column] = getCurrentPlayer().mark
-    }
-    
-    @IBAction func onClickCell20(_ sender: UIButton) {
-        let row = 2
-        let column = 0
-        
-        board[row][column] = getCurrentPlayer().mark
-    }
-    
-    @IBAction func onClickCell21(_ sender: UIButton) {
-        let row = 2
-        let column = 1
-        
-        board[row][column] = getCurrentPlayer().mark
-    }
-    
-    @IBAction func onClickCell22(_ sender: UIButton) {
-        let row = 2
-        let column = 2
-        
-        board[row][column] = getCurrentPlayer().mark
-    }
-    
-    func updateBoard (row: Int, column: Int, mark: Mark) {
-        
-//        if mark == .NOUGHT {
-//            image = UIImage(named: "nought")!
-//        } else if mark == .CROSS {
-//            image = UIImage(named: "cross")!
-//        }
-//
-//        if image != nil {
-//            cell00.setImage(image, for: .normal)
-//        }
-        cell00.setBackgroundImage(UIImage(named: "cross"), for: .normal)
     }
     
     func initializeBoard () {
@@ -182,7 +115,24 @@ class ViewController: UIViewController {
     }
     
     func getCurrentPlayer () -> Player {
-        return self.player1
+        let lastGame = self.gameHistory.last
+        var player: Player? = nil
+        
+        if let game = lastGame {
+            player = game.player
+        }
+        
+        if player == nil {
+            player = player1
+        } else {
+            if player == player1 {
+                player = player2
+            } else {
+                player = player1
+            }
+        }
+        
+        return player!
     }
 }
 
