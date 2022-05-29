@@ -145,7 +145,7 @@ class ViewController: UIViewController {
             var isRowSame: Bool = false
             
             for j in 0 ..< COLUMN {
-                if (board[i][j] == board[i][0] && board[i][0] != .EMPTY) {
+                if (board[i][j] == board[i][0] && board[i][0] != .EMPTY) || (board[j][i] == board[j][0] && board[j][0] != .EMPTY) {
                     if j == 2 {
                         isRowSame = true
                     }
