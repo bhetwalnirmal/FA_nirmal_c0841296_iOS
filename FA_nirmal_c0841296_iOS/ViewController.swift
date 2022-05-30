@@ -34,6 +34,12 @@ class ViewController: UIViewController {
     @IBOutlet weak var cell21: UIButton!
     @IBOutlet weak var cell22: UIButton!
     
+    override var canBecomeFirstResponder: Bool {
+        get {
+            return true
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -45,6 +51,8 @@ class ViewController: UIViewController {
         let swipeGesture: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(resetGame))
         // add gesture recognizer to the view
         self.view.addGestureRecognizer(swipeGesture)
+        
+        self.becomeFirstResponder()
     }
     
     // handle the touch event of the buttons
@@ -196,6 +204,13 @@ class ViewController: UIViewController {
     
     @objc func resetGame (_ sender: UISwipeGestureRecognizer) {
         reset()
+    }
+    
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        // handle logic on motion shake event
+        if motion == .motionShake {
+            
+        }
     }
 }
 
