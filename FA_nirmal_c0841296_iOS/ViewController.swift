@@ -255,6 +255,8 @@ class ViewController: UIViewController {
         // if the button is not nil then undo the move
         if let button = pressedButton {
             button.setImage(nil, for: .normal)
+            // remove the last move from the array
+            board[row][column] = Mark.EMPTY
         }
     }
 }
