@@ -53,6 +53,7 @@ class ViewController: UIViewController {
         // add gesture recognizer to the view
         self.view.addGestureRecognizer(swipeGesture)
         
+        // set this view to first responder when user shakes the phone
         self.becomeFirstResponder()
     }
     
@@ -121,6 +122,7 @@ class ViewController: UIViewController {
         
         // display cross or nought
         sender.setImage(UIImage(named: imageName), for: .normal)
+        sender.isUserInteractionEnabled = false
     }
     
     func initializeBoard (reset: Bool = false) {
@@ -136,14 +138,23 @@ class ViewController: UIViewController {
                     
                     // empty the tic tac toe board
                     cell00.setImage(nil, for: .normal)
+                    cell00.isUserInteractionEnabled = true
                     cell01.setImage(nil, for: .normal)
+                    cell01.isUserInteractionEnabled = true
                     cell02.setImage(nil, for: .normal)
+                    cell02.isUserInteractionEnabled = true
                     cell10.setImage(nil, for: .normal)
+                    cell10.isUserInteractionEnabled = true
                     cell11.setImage(nil, for: .normal)
+                    cell11.isUserInteractionEnabled = true
                     cell12.setImage(nil, for: .normal)
+                    cell12.isUserInteractionEnabled = true
                     cell20.setImage(nil, for: .normal)
+                    cell20.isUserInteractionEnabled = true
                     cell21.setImage(nil, for: .normal)
+                    cell21.isUserInteractionEnabled = true
                     cell22.setImage(nil, for: .normal)
+                    cell22.isUserInteractionEnabled = true
                 }
             }
         }
