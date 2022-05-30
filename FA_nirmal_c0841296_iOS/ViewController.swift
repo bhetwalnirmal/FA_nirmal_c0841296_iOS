@@ -34,6 +34,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var cell21: UIButton!
     @IBOutlet weak var cell22: UIButton!
     
+    // set the view to become the first responder
     override var canBecomeFirstResponder: Bool {
         get {
             return true
@@ -128,9 +129,12 @@ class ViewController: UIViewController {
             for j in 0 ..< COLUMN {
                 board[i][j] = .EMPTY
                 
+                // reset the game
                 if reset {
+                    // set game history to empty
                     gameHistory = [GameHistory]()
                     
+                    // empty the tic tac toe board
                     cell00.setImage(nil, for: .normal)
                     cell01.setImage(nil, for: .normal)
                     cell02.setImage(nil, for: .normal)
@@ -199,17 +203,58 @@ class ViewController: UIViewController {
     }
     
     func reset () {
+        // re-initialize the board
         initializeBoard(reset: true)
     }
     
     @objc func resetGame (_ sender: UISwipeGestureRecognizer) {
+        // reset the game
         reset()
     }
     
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         // handle logic on motion shake event
         if motion == .motionShake {
-            
+            if let lastMove = gameHistory.popLast() {
+                undoLastMove(row: lastMove.row, column: lastMove.column)
+            }
+        }
+    }
+    
+    func undoLastMove (row: Int, column: Int) {
+        // check which button was pressed
+        var pressedButton: UIButton? = nil
+        
+        // undo the last move of the user
+        if row == 0 {
+            if column == 0 {
+                pressedButton = cell00
+            } else if column == 1 {
+                pressedButton = cell01
+            } else if column == 2 {
+                pressedButton = cell02
+            }
+        } else if row == 1 {
+            if column == 0 {
+                pressedButton = cell10
+            } else if column == 1 {
+                pressedButton = cell11
+            } else if column == 2 {
+                pressedButton = cell12
+            }
+        } else if row == 2 {
+            if column == 0 {
+                pressedButton = cell20
+            } else if column == 1 {
+                pressedButton = cell21
+            } else if column == 2 {
+                pressedButton = cell22
+            }
+        }
+        
+        // if the button is not nil then undo the move
+        if let button = pressedButton {
+            button.setImage(nil, for: .normal)
         }
     }
 }
