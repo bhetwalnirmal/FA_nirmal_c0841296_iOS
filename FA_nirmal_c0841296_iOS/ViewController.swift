@@ -98,7 +98,7 @@ class ViewController: UIViewController {
         // get the player's current mark
         let mark = getCurrentPlayer().mark!
         
-        // set the cell of board to corresponding mark 
+        // set the cell of board to corresponding mark
         board[row][column] = mark
         
         var imageName: String! = "nought"
@@ -182,6 +182,7 @@ class ViewController: UIViewController {
             }
         }
         
+        // check the diagonal of the board
         if (board[0][0] == board[1][1] && board[0][0] == board[2][2] && board[0][0] != .EMPTY) || (board[0][2] == board[1][1] && board[0][2] == board[2][0] && board[0][2] != .EMPTY) {
             hasWon = true
         }
