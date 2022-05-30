@@ -15,7 +15,8 @@ let CROSS: Int = 2
 let EMPTY: Int = 0
 
 class ViewController: UIViewController {
-    @IBOutlet weak var btnPlayAgain: UIButton!
+    // tic tac toe board image
+    @IBOutlet weak var boardImage: UIImageView!
     // initialize the board variable
     var board: [[Mark]] = [[Mark]](repeating: [Mark](repeating: .EMPTY, count: ROW), count: COLUMN)
     
@@ -40,6 +41,10 @@ class ViewController: UIViewController {
         // initialize the board
         initializeBoard()
         
+        // initialize gesture recgonizer
+        let swipeGesture: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(resetGame))
+        // add gesture recognizer to the view
+        self.view.addGestureRecognizer(swipeGesture)
     }
     
     // handle the touch event of the buttons
@@ -90,29 +95,44 @@ class ViewController: UIViewController {
                 break
         }
         
+        // get the player's current mark
         let mark = getCurrentPlayer().mark!
         
+        // set the cell of board to corresponding mark 
         board[row][column] = mark
         
         var imageName: String! = "nought"
         
+        // set the image to cross
         if mark == Mark.CROSS {
             imageName = "cross"
         }
         
         self.gameHistory.append(GameHistory(player: getCurrentPlayer(), mark: mark, row: row, column: column))
         
+        // display cross or nought
         sender.setImage(UIImage(named: imageName), for: .normal)
-        if checkIfAUserWins() == true {
-            print("user won")
-        }
     }
     
-    func initializeBoard () {
+    func initializeBoard (reset: Bool = false) {
 //        btnPlayAgain.isHidden = true
         for i in 0 ..< ROW {
             for j in 0 ..< COLUMN {
                 board[i][j] = .EMPTY
+                
+                if reset {
+                    gameHistory = [GameHistory]()
+                    
+                    cell00.setImage(nil, for: .normal)
+                    cell01.setImage(nil, for: .normal)
+                    cell02.setImage(nil, for: .normal)
+                    cell10.setImage(nil, for: .normal)
+                    cell11.setImage(nil, for: .normal)
+                    cell12.setImage(nil, for: .normal)
+                    cell20.setImage(nil, for: .normal)
+                    cell21.setImage(nil, for: .normal)
+                    cell22.setImage(nil, for: .normal)
+                }
             }
         }
     }
@@ -167,6 +187,14 @@ class ViewController: UIViewController {
         }
         
         return hasWon
+    }
+    
+    func reset () {
+        initializeBoard(reset: true)
+    }
+    
+    @objc func resetGame (_ sender: UISwipeGestureRecognizer) {
+        reset()
     }
 }
 

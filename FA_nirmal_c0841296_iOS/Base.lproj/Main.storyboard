@@ -126,6 +126,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="boardImage" destination="fWQ-mn-oAF" id="1bA-cf-Xik"/>
                         <outlet property="cell00" destination="Z80-Qx-Enp" id="Wnx-04-DrS"/>
                         <outlet property="cell01" destination="25b-iv-cRG" id="LgS-wQ-ihU"/>
                         <outlet property="cell02" destination="BQy-eF-Qif" id="bka-Vj-UTl"/>
