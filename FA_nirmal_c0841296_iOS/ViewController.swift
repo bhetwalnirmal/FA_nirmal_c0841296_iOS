@@ -122,6 +122,7 @@ class ViewController: UIViewController {
         
         // display cross or nought
         sender.setImage(UIImage(named: imageName), for: .normal)
+        // disable the user interaction when the user clicks the cell
         sender.isUserInteractionEnabled = false
     }
     
@@ -136,7 +137,7 @@ class ViewController: UIViewController {
                     // set game history to empty
                     gameHistory = [GameHistory]()
                     
-                    // empty the tic tac toe board
+                    // empty the tic tac toe board and enable the user interaction
                     cell00.setImage(nil, for: .normal)
                     cell00.isUserInteractionEnabled = true
                     cell01.setImage(nil, for: .normal)
