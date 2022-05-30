@@ -13,7 +13,11 @@ enum Mark: Int {
     case EMPTY
 }
 
-class Player {
+class Player: Equatable {
+    static func == (lhs: Player, rhs: Player) -> Bool {
+        return lhs.name == rhs.name
+    }
+    
     var name: String!
     var mark: Mark!
     
