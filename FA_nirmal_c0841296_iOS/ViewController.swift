@@ -7,8 +7,8 @@
 
 import UIKit
 
-let ROW = 3
-let COLUMN = 3
+let ROW: Int = 3
+let COLUMN: Int = 3
 
 let NOUGHT: Int = 1
 let CROSS: Int = 2
@@ -103,6 +103,9 @@ class ViewController: UIViewController {
         self.gameHistory.append(GameHistory(player: getCurrentPlayer(), mark: mark, row: row, column: column))
         
         sender.setImage(UIImage(named: imageName), for: .normal)
+        if checkIfAUserWins() == true {
+            print("user won")
+        }
     }
     
     func initializeBoard () {
@@ -133,6 +136,37 @@ class ViewController: UIViewController {
         }
         
         return player!
+    }
+    
+    func checkIfAUserWins () -> Bool {
+        var hasWon = false
+        
+        for i in 0 ..< ROW {
+            var isRowSame: Bool = false
+            
+            for j in 0 ..< COLUMN {
+                if (board[i][j] == board[i][0] && board[i][0] != .EMPTY) || (board[j][i] == board[j][0] && board[j][0] != .EMPTY) {
+                    if j == 2 {
+                        isRowSame = true
+                    }
+                    continue
+                } else {
+                    isRowSame = false
+                    break
+                }
+            }
+            
+            if isRowSame {
+                hasWon = true
+                break
+            }
+        }
+        
+        if (board[0][0] == board[1][1] && board[0][0] == board[2][2] && board[0][0] != .EMPTY) || (board[0][2] == board[1][1] && board[0][2] == board[2][0] && board[0][2] != .EMPTY) {
+            hasWon = true
+        }
+        
+        return hasWon
     }
 }
 
