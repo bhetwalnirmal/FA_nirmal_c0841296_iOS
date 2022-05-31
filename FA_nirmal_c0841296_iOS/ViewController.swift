@@ -20,6 +20,8 @@ class ViewController: UIViewController {
     // initialize the board variable
     var board: [[Mark]] = [[Mark]](repeating: [Mark](repeating: .EMPTY, count: ROW), count: COLUMN)
     
+    @IBOutlet weak var player1Score: UILabel!
+    @IBOutlet weak var player2Score: UILabel!
     var player1: Player = Player(name: "Player 1", mark: .NOUGHT)
     var player2: Player = Player(name: "Player 2", mark: .CROSS)
     var gameHistory: [GameHistory] = [GameHistory]()
@@ -127,7 +129,9 @@ class ViewController: UIViewController {
         sender.isUserInteractionEnabled = false
         
         if checkIfAUserWins() == true {
-            print("\(currentPlayer.name) has won")
+            // update the player's score when a player wins
+            currentPlayer.increaseWinCount()
+            updatePlayerScoreBoard()
         }
     }
     
@@ -267,6 +271,19 @@ class ViewController: UIViewController {
             button.setImage(nil, for: .normal)
             // remove the last move from the array
             board[row][column] = Mark.EMPTY
+        }
+    }
+    
+    func updatePlayerScoreBoard () {
+        player1Score.text = "Player 1 (\(getMark(mark: player1.mark))): \(player1.winCount)"
+        player2Score.text = "Player 2 (\(getMark(mark: player2.mark))): \(player2.winCount)"
+    }
+    
+    func getMark (mark: Mark) -> String {
+        if mark == .CROSS {
+            return "X"
+        } else {
+            return "O"
         }
     }
 }
