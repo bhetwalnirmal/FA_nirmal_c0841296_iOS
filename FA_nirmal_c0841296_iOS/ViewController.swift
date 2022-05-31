@@ -61,6 +61,10 @@ class ViewController: UIViewController {
     @IBAction func onClickCell00(_ sender: UIButton) {
         var row = 0
         var column = 0
+        let currentPlayer: Player = getCurrentPlayer()
+        
+        // get the player's current mark
+        let mark = currentPlayer.mark!
         
         // check which button was pressed
         switch sender {
@@ -105,9 +109,6 @@ class ViewController: UIViewController {
                 break
         }
         
-        // get the player's current mark
-        let mark = getCurrentPlayer().mark!
-        
         // set the cell of board to corresponding mark
         board[row][column] = mark
         
@@ -124,6 +125,10 @@ class ViewController: UIViewController {
         sender.setImage(UIImage(named: imageName), for: .normal)
         // disable the user interaction when the user clicks the cell
         sender.isUserInteractionEnabled = false
+        
+        if checkIfAUserWins() == true {
+            print("\(currentPlayer.name) has won")
+        }
     }
     
     func initializeBoard (reset: Bool = false) {
@@ -185,30 +190,23 @@ class ViewController: UIViewController {
     func checkIfAUserWins () -> Bool {
         var hasWon = false
         
-        for i in 0 ..< ROW {
-            var isRowSame: Bool = false
-            
-            for j in 0 ..< COLUMN {
-                if (board[i][j] == board[i][0] && board[i][0] != .EMPTY) || (board[j][i] == board[j][0] && board[j][0] != .EMPTY) {
-                    if j == 2 {
-                        isRowSame = true
-                    }
-                    continue
-                } else {
-                    isRowSame = false
-                    break
-                }
-            }
-            
-            if isRowSame {
+        if let lastMove = gameHistory.last {
+            if (board[0][0] == board[0][1] && board[0][0] == board[0][2] && board[0][0] == lastMove.mark) {
                 hasWon = true
-                break
+            } else if (board[1][0] == board[1][1] && board[1][0] == board[1][2] && board[1][0] == lastMove.mark) {
+                hasWon = true
+            } else if (board[2][0] == board[2][1] && board[2][1] == board[2][2] && board[2][0] == lastMove.mark) {
+                hasWon = true
+            } else if (board[0][0] == board[1][0] && board[0][0] == board[2][0] && board[0][0] == lastMove.mark) {
+                hasWon = true
+            } else if (board[0][1] == board[1][1] && board[0][1] == board[2][1] && board[0][1] == lastMove.mark) {
+                hasWon = true
+            } else if (board[0][2] == board[1][2] && board[0][2] == board[2][2] && board[0][2] == lastMove.mark) {
+                hasWon = true
+                // check the diagonal of the board
+            } else if (board[0][0] == board[1][1] && board[0][0] == board[2][2] && board[0][0] != .EMPTY) || (board[0][2] == board[1][1] && board[0][2] == board[2][0] && board[0][2] != .EMPTY) {
+                hasWon = true
             }
-        }
-        
-        // check the diagonal of the board
-        if (board[0][0] == board[1][1] && board[0][0] == board[2][2] && board[0][0] != .EMPTY) || (board[0][2] == board[1][1] && board[0][2] == board[2][0] && board[0][2] != .EMPTY) {
-            hasWon = true
         }
         
         return hasWon
