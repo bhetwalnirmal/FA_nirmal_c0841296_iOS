@@ -128,10 +128,36 @@ class ViewController: UIViewController {
         // disable the user interaction when the user clicks the cell
         sender.isUserInteractionEnabled = false
         
-        if checkIfAUserWins() == true {
-            // update the player's score when a player wins
+        var hasUserWon: Bool = checkIfAUserWins()
+        
+        if hasUserWon == true {
+            // update the player's score when a player wins"
             currentPlayer.increaseWinCount()
             updatePlayerScoreBoard()
+            
+            // create the alert
+            let alert = UIAlertController(title: "\(currentPlayer.name ?? "") won!", message: "\(currentPlayer.name ?? "") has won the game", preferredStyle: UIAlertController.Style.alert)
+            // add the actions (buttons)
+            let nextGameAction = UIAlertAction(title: "Play Again", style: .default) { (action) -> Void in
+                self.reset()
+            }
+            
+            alert.addAction(nextGameAction)
+            // show the alert
+            self.present(alert, animated: true, completion: nil)
+        }
+        
+        if isGameDraw() == true {
+            // create the alert
+            let alert = UIAlertController(title: "Draw", message: "Game is Draw", preferredStyle: UIAlertController.Style.alert)
+            // add the actions (buttons)
+            let nextGameAction = UIAlertAction(title: "Play Again", style: .default) { (action) -> Void in
+                self.reset()
+            }
+            
+            alert.addAction(nextGameAction)
+            // show the alert
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
@@ -285,6 +311,26 @@ class ViewController: UIViewController {
         } else {
             return "O"
         }
+    }
+    
+    func isGameDraw () -> Bool {
+        var isBoardFilled = true
+        
+        for i in 0 ..< ROW {
+            for j in 0 ..< COLUMN {
+                if board[i][j] == .EMPTY {
+                    isBoardFilled = false
+                    
+                    break
+                }
+            }
+            
+            if isBoardFilled == false {
+                break
+            }
+        }
+        
+        return isBoardFilled
     }
 }
 
