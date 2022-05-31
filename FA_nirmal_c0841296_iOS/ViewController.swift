@@ -20,6 +20,8 @@ class ViewController: UIViewController {
     // initialize the board variable
     var board: [[Mark]] = [[Mark]](repeating: [Mark](repeating: .EMPTY, count: ROW), count: COLUMN)
     
+    @IBOutlet weak var player1Score: UILabel!
+    @IBOutlet weak var player2Score: UILabel!
     var player1: Player = Player(name: "Player 1", mark: .NOUGHT)
     var player2: Player = Player(name: "Player 2", mark: .CROSS)
     var gameHistory: [GameHistory] = [GameHistory]()
@@ -53,6 +55,7 @@ class ViewController: UIViewController {
         // add gesture recognizer to the view
         self.view.addGestureRecognizer(swipeGesture)
         
+        // set this view to first responder when user shakes the phone
         self.becomeFirstResponder()
     }
     
@@ -60,6 +63,10 @@ class ViewController: UIViewController {
     @IBAction func onClickCell00(_ sender: UIButton) {
         var row = 0
         var column = 0
+        let currentPlayer: Player = getCurrentPlayer()
+        
+        // get the player's current mark
+        let mark = currentPlayer.mark!
         
         // check which button was pressed
         switch sender {
@@ -104,9 +111,6 @@ class ViewController: UIViewController {
                 break
         }
         
-        // get the player's current mark
-        let mark = getCurrentPlayer().mark!
-        
         // set the cell of board to corresponding mark
         board[row][column] = mark
         
@@ -121,6 +125,14 @@ class ViewController: UIViewController {
         
         // display cross or nought
         sender.setImage(UIImage(named: imageName), for: .normal)
+        // disable the user interaction when the user clicks the cell
+        sender.isUserInteractionEnabled = false
+        
+        if checkIfAUserWins() == true {
+            // update the player's score when a player wins
+            currentPlayer.increaseWinCount()
+            updatePlayerScoreBoard()
+        }
     }
     
     func initializeBoard (reset: Bool = false) {
@@ -134,16 +146,25 @@ class ViewController: UIViewController {
                     // set game history to empty
                     gameHistory = [GameHistory]()
                     
-                    // empty the tic tac toe board
+                    // empty the tic tac toe board and enable the user interaction
                     cell00.setImage(nil, for: .normal)
+                    cell00.isUserInteractionEnabled = true
                     cell01.setImage(nil, for: .normal)
+                    cell01.isUserInteractionEnabled = true
                     cell02.setImage(nil, for: .normal)
+                    cell02.isUserInteractionEnabled = true
                     cell10.setImage(nil, for: .normal)
+                    cell10.isUserInteractionEnabled = true
                     cell11.setImage(nil, for: .normal)
+                    cell11.isUserInteractionEnabled = true
                     cell12.setImage(nil, for: .normal)
+                    cell12.isUserInteractionEnabled = true
                     cell20.setImage(nil, for: .normal)
+                    cell20.isUserInteractionEnabled = true
                     cell21.setImage(nil, for: .normal)
+                    cell21.isUserInteractionEnabled = true
                     cell22.setImage(nil, for: .normal)
+                    cell22.isUserInteractionEnabled = true
                 }
             }
         }
@@ -173,30 +194,23 @@ class ViewController: UIViewController {
     func checkIfAUserWins () -> Bool {
         var hasWon = false
         
-        for i in 0 ..< ROW {
-            var isRowSame: Bool = false
-            
-            for j in 0 ..< COLUMN {
-                if (board[i][j] == board[i][0] && board[i][0] != .EMPTY) || (board[j][i] == board[j][0] && board[j][0] != .EMPTY) {
-                    if j == 2 {
-                        isRowSame = true
-                    }
-                    continue
-                } else {
-                    isRowSame = false
-                    break
-                }
-            }
-            
-            if isRowSame {
+        if let lastMove = gameHistory.last {
+            if (board[0][0] == board[0][1] && board[0][0] == board[0][2] && board[0][0] == lastMove.mark) {
                 hasWon = true
-                break
+            } else if (board[1][0] == board[1][1] && board[1][0] == board[1][2] && board[1][0] == lastMove.mark) {
+                hasWon = true
+            } else if (board[2][0] == board[2][1] && board[2][1] == board[2][2] && board[2][0] == lastMove.mark) {
+                hasWon = true
+            } else if (board[0][0] == board[1][0] && board[0][0] == board[2][0] && board[0][0] == lastMove.mark) {
+                hasWon = true
+            } else if (board[0][1] == board[1][1] && board[0][1] == board[2][1] && board[0][1] == lastMove.mark) {
+                hasWon = true
+            } else if (board[0][2] == board[1][2] && board[0][2] == board[2][2] && board[0][2] == lastMove.mark) {
+                hasWon = true
+                // check the diagonal of the board
+            } else if (board[0][0] == board[1][1] && board[0][0] == board[2][2] && board[0][0] != .EMPTY) || (board[0][2] == board[1][1] && board[0][2] == board[2][0] && board[0][2] != .EMPTY) {
+                hasWon = true
             }
-        }
-        
-        // check the diagonal of the board
-        if (board[0][0] == board[1][1] && board[0][0] == board[2][2] && board[0][0] != .EMPTY) || (board[0][2] == board[1][1] && board[0][2] == board[2][0] && board[0][2] != .EMPTY) {
-            hasWon = true
         }
         
         return hasWon
@@ -255,6 +269,21 @@ class ViewController: UIViewController {
         // if the button is not nil then undo the move
         if let button = pressedButton {
             button.setImage(nil, for: .normal)
+            // remove the last move from the array
+            board[row][column] = Mark.EMPTY
+        }
+    }
+    
+    func updatePlayerScoreBoard () {
+        player1Score.text = "Player 1 (\(getMark(mark: player1.mark))): \(player1.winCount)"
+        player2Score.text = "Player 2 (\(getMark(mark: player2.mark))): \(player2.winCount)"
+    }
+    
+    func getMark (mark: Mark) -> String {
+        if mark == .CROSS {
+            return "X"
+        } else {
+            return "O"
         }
     }
 }
